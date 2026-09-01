@@ -1,0 +1,19 @@
+package com.newsaggregator.newsaggregator.translation;
+
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/translate")
+public class TranslationController {
+
+    private final TranslationService translationService;
+
+    public TranslationController(TranslationService translationService) {
+        this.translationService = translationService;
+    }
+
+    @PostMapping
+    public TranslateResponse translate(@RequestBody TranslateRequest request) {
+        return translationService.translate(request.getText(), request.getTargetLanguage());
+    }
+}
